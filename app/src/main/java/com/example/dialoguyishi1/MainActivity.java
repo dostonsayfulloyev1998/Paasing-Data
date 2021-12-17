@@ -14,26 +14,33 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements MyAdapter.Bosilish_Uchun_Interface  {
-
+public class MainActivity extends AppCompatActivity implements PassingData {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        FragmentA fragmentA = new FragmentA();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container, fragmentA)
+                .addToBackStack(null)
+                .commit();
     }
-
 
     @Override
-    public void onItemClick_bosish_funksiya(int i, View v) {
+    public void passData(String name) {
+          FragmentBolim fragmentBolim = new FragmentBolim();
+          Bundle bundle = new Bundle();
+          bundle.putString("name",name);
+          fragmentBolim.setArguments(bundle);
 
-             FragmentBolim fragmentBolim=new FragmentBolim();
-                FragmentManager fragmentManager= getSupportFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.ll,fragmentBolim,null)
-                        .addToBackStack(null)
-                        .commit();
-        }
+          FragmentManager manager = getSupportFragmentManager();
 
+          manager.beginTransaction()
+                  .replace(R.id.container,fragmentBolim)
+                  .addToBackStack(null)
+                  .commit();
     }
+}

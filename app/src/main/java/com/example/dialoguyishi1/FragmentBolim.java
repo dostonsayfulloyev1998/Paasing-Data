@@ -14,21 +14,28 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class FragmentBolim extends Fragment implements MyAdapter.Bosilish_Uchun_Interface {
+public class FragmentBolim extends Fragment  {
     private ArrayList<ModelKlass> list;
     private MyAdapter adapter;
     private RecyclerView recyclerView;
+
+    String name;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        name = getArguments().getString("name");
+
+        Toast.makeText(getContext(),name,Toast.LENGTH_SHORT).show();
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_layout,container,false);
-        recyclerView=view.findViewById(R.id.res1);
-        loaddata();
-        adapter=new MyAdapter(list,inflater.getContext());
-        adapter.setListener((MyAdapter.Bosilish_Uchun_Interface)this);
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(inflater.getContext());
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(adapter);
+
+
         return view;
     }
     public  void  loaddata(){
@@ -39,11 +46,4 @@ public class FragmentBolim extends Fragment implements MyAdapter.Bosilish_Uchun_
 
     }
 
-    @Override
-    public void onItemClick_bosish_funksiya(int i, View v) {
-
-        String name=list.get(i).getName().toString();
-        Toast.makeText(getContext(), "name", Toast.LENGTH_SHORT).show();
-
-    }
 }

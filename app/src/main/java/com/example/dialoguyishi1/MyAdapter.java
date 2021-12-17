@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,10 +16,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     private ArrayList<ModelKlass>list;
     private Context context;
-    private Bosilish_Uchun_Interface listener; // listener interfaceni obekti
+   private PassingData passingData;
 
-    public void setListener(Bosilish_Uchun_Interface listener) {
-        this.listener = listener;
+
+    public void setPassingData(PassingData passingData) {
+        this.passingData = passingData;
     }
 
     public MyAdapter(ArrayList<ModelKlass> list, Context context) {
@@ -41,16 +43,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         int p=position;
-        String name=list.get(position).getName();
-        String disc=list.get(position).getDisc();
-
+        String name=list.get(p).getName();
+        String disc=list.get(p).getDisc();
         holder.name.setText(name);
         holder.disc.setText(disc);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onItemClick_bosish_funksiya(p,v);
+                  passingData.passData(name);
             }
         });
 
@@ -70,8 +71,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             disc=itemView.findViewById(R.id.tv2);
         }
     }
+}
 
-    interface Bosilish_Uchun_Interface{
-        void onItemClick_bosish_funksiya(int i, View v);
-    }
+interface PassingData{
+    void passData(String name);
 }

@@ -15,7 +15,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
-public class FragmentA extends Fragment implements DialogFragment.DialogListener,MyAdapter.Bosilish_Uchun_Interface{
+public class FragmentA extends Fragment implements DialogFragment.DialogListener, PassingData{
 
     private RecyclerView recyclerView;
     private ArrayList<ModelKlass> list;
@@ -30,7 +30,8 @@ public class FragmentA extends Fragment implements DialogFragment.DialogListener
         recyclerView=view.findViewById(R.id.res);
         fab=view.findViewById(R.id.fab);
         loaddata();
-        adapter=new MyAdapter(list,getActivity());
+        adapter=new MyAdapter(list,getContext());
+        adapter.setPassingData(this::passData);
         recyclerView.setAdapter(adapter);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,7 +40,7 @@ public class FragmentA extends Fragment implements DialogFragment.DialogListener
                 dialogFragment.show(getChildFragmentManager(),"fragment");
             }
         });
-        adapter.setListener((MyAdapter.Bosilish_Uchun_Interface)this);
+
 
         return view;
     }
@@ -57,7 +58,8 @@ public class FragmentA extends Fragment implements DialogFragment.DialogListener
     }
 
     @Override
-    public void onItemClick_bosish_funksiya(int i, View v) {
-
+    public void passData(String name) {
+        MainActivity activity = (MainActivity) getActivity();
+        activity.passData(name);
     }
 }
