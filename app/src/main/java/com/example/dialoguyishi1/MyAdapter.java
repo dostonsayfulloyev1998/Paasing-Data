@@ -57,7 +57,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
 
 
-
     @Override
     public int getItemCount() {
         return list.size();
@@ -71,6 +70,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             disc=itemView.findViewById(R.id.tv2);
         }
     }
+
     interface Bosilish_Uchun_Interface{
         void onItemClick_bosish_funksiya(int i, View v);
     }
