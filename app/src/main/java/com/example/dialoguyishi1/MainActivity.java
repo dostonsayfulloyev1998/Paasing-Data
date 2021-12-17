@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements PassingData {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         FragmentA fragmentA = new FragmentA();
         getSupportFragmentManager()
                 .beginTransaction()
